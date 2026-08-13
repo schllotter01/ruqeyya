@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sənə bir sualım var... ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 350px;
+            width: 100%;
+            position: relative;
+        }
+
+        .emoji {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 22px;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 15px;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #heBtn {
+            background-color: #28a745;
+            color: white;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        #heBtn:active {
+            transform: scale(0.95);
+        }
+
+        #yoxBtn {
+            background-color: #dc3545;
+            color: white;
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+            position: absolute;
+            z-index: 999;
+        }
+
+        .success-message {
+            display: none;
+        }
+
+        .success-message h2 {
+            color: #d63384;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #555;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div class="emoji">🥺👉👈</div>
+        <h1>Səni çox sevirəm... <br>Sən də məni bəyənirsən?</h1>
+        
+        <div class="btn-group" id="btnGroup">
+            <button id="heBtn">Hə 😍</button>
+            <button id="yoxBtn">Yox 🙈</button>
+        </div>
+    </div>
+
+    <div class="card success-message" id="successCard">
+        <div class="emoji">💖🎉✨</div>
+        <h2>BİLİRDİM! 🥰</h2>
+        <p>Mən də səni çox sevirəm! ❤️</p>
+    </div>
+
+    <script>
+        const yoxBtn = document.getElementById('yoxBtn');
+        const heBtn = document.getElementById('heBtn');
+        const mainCard = document.getElementById('mainCard');
+        const successCard = document.getElementById('successCard');
+
+        function initYoxPos() {
+            const heRect = heBtn.getBoundingClientRect();
+            yoxBtn.style.left = (heBtn.offsetLeft + heBtn.offsetWidth + 20) + 'px';
+            yoxBtn.style.top = heBtn.offsetTop + 'px';
+        }
+
+        window.onload = initYoxPos;
+
+        function moveButton(e) {
+            if (e) e.preventDefault();
+
+            const padding = 20;
+            const btnWidth = yoxBtn.offsetWidth;
+            const btnHeight = yoxBtn.offsetHeight;
+
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            yoxBtn.style.position = 'fixed';
+            yoxBtn.style.left = `${randomX}px`;
+            yoxBtn.style.top = `${randomY}px`;
+        }
+
+        yoxBtn.addEventListener('touchstart', moveButton, { passive: false });
+        yoxBtn.addEventListener('mouseover', moveButton);
+        yoxBtn.addEventListener('click', moveButton);
+
+        heBtn.addEventListener('click', () => {
+            mainCard.style.display = 'none';
+            yoxBtn.style.display = 'none';
+            successCard.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
