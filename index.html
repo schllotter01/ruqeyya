@@ -103,14 +103,22 @@
         .success-message h2 {
             color: #34d399;
             font-size: 28px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-weight: 800;
         }
 
-        .success-message p {
+        .german-text {
+            color: #38bdf8;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .translation-text {
             color: #94a3b8;
-            font-size: 17px;
-            line-height: 1.5;
+            font-size: 15px;
+            font-style: italic;
         }
 
         /* Konfetti Konteyneri */
@@ -140,9 +148,10 @@
     </div>
 
     <div class="card success-message" id="successCard">
-        <div class="emoji">🚀🔥🎉</div>
-        <h2>BİLİRDİM! </h2>
-        <p>Ən doğru seçim! Birlikdə super komandayıq! 😉</p>
+        <div class="emoji">💖🎉✨</div>
+        <h2>BİLİRDİM! 🥰</h2>
+        <p class="german-text">Ich liebe dich von ganzem Herzen! ❤️</p>
+        <p class="translation-text">(Tərcüməsi: Səni bütün qəlbimlə sevirəm!)</p>
     </div>
 
     <script>
@@ -151,7 +160,7 @@
         const mainCard = document.getElementById('mainCard');
         const successCard = document.getElementById('successCard');
 
-        let heScale = 1; // "Hə" düyməsinin böyümə miqyası
+        let heScale = 1;
 
         function initYoxPos() {
             yoxBtn.style.left = (heBtn.offsetLeft + heBtn.offsetWidth + 15) + 'px';
@@ -160,15 +169,12 @@
 
         window.onload = initYoxPos;
 
-        // "Yox"a toxunanda: Düymə qaçır VƏ "Hə" düyməsi böyüyür!
         function moveButton(e) {
             if (e) e.preventDefault();
 
-            // 1. "Hə" düyməsini böyüt
             heScale += 0.25;
             heBtn.style.transform = `scale(${heScale})`;
 
-            // 2. "Yox" düyməsini başqa yerə qaçırt
             const padding = 30;
             const btnWidth = yoxBtn.offsetWidth;
             const btnHeight = yoxBtn.offsetHeight;
@@ -188,17 +194,13 @@
         yoxBtn.addEventListener('mouseover', moveButton);
         yoxBtn.addEventListener('click', moveButton);
 
-        // "Hə" basıldıqda
         heBtn.addEventListener('click', () => {
             mainCard.style.display = 'none';
             yoxBtn.style.display = 'none';
             successCard.style.display = 'block';
-            startConfetti(); // Feyerverk effektini başlat
+            startConfetti();
         });
 
-        // ----------------
-        // KONFETTİ EFFEKTİ
-        // ----------------
         function startConfetti() {
             const canvas = document.getElementById('confetti');
             const ctx = canvas.getContext('2d');
